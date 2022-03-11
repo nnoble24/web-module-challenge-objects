@@ -1,5 +1,7 @@
 /*❗❗ MAKE SURE TO RETURN ALL OF THE ANSWERS ON THESE TASKS, IF YOU DON'T, THE AUTOGRADER WILL NOT WORK ❗❗*/
 
+const { TestWatcher } = require("jest");
+
 /*When doing these tasks, we recommend using console.log to test the output of your code to make sure it works correctly.*/
 
 ///////////////Menu Items (MVP)///////////////////
@@ -16,9 +18,11 @@ The function should:
 */
 
 
-function createMenuItem(/*Your code here*/){
-  /*Your code here*/
+function createMenuItem(menueItem, price, mealType){
+ const mealName = {name: menueItem, price: price, category: mealType};
+return mealName
 }
+
 
 
 
@@ -51,10 +55,16 @@ const burger = {
   name: "Burger", 
   price: 18, 
   category: "Lunch", 
-  
+discount: function(person) {
+  if(person === 'teacher') {
+    return this.price * .75
+  } else if(person === 'student') {
+    return this.price * .75
+  } else if(person === 'public') {
+    return this.price * .90
+  }
 }
-
-
+}
 
 ///////////////Reviews (MVP)///////////////////
 const reviews = [
@@ -72,7 +82,7 @@ const reviews = [
 Using the reviews array above:
   1. log only Julius' feedback to the console - no function needed 
 */
-
+console.log(reviews[5].feedback)
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4 (not auto-tested): 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -80,9 +90,8 @@ Reyna's feedback is missing! Use what you know to do the following: (no function
   1. Add this feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"
   2. log the reviews array to the console to check your work
 */
-
-
-
+reviews[7].feedback = "this place is chill with really cool people, great for getting work done on weekdays";
+console.log(reviews[7].feedback)
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Write a function that creates an object with name, rating, feedback, add the new review to the end of an array and returns the resulting array
  the addReview function below to do the following:
@@ -92,9 +101,15 @@ Write a function that creates an object with name, rating, feedback, add the new
   4. should return the resulting array
 */
 
-
-function addReview(/*Your Code Here */){
-  /*Your Code Here */
+const newLine = []
+function addReview(reviews, name, rating, feedback){
+ const newReview = {
+   name: name,
+   rating: rating, 
+   feedback: feedback
+ } 
+ reviews.push(newReview)
+ return reviews
 }
 
 
@@ -110,8 +125,9 @@ Use the getReviewByIndex function below to do the following:
 */
 
 
-function getReviewByIndex(/*Your code here*/) {
-  /*Your code here*/
+function getReviewByIndex(reviews, index) {
+const review = reviews[index]
+  return `${review.name} gave the restaurant a ${review.rating} star review, and their feedback was: ${review.feedback}`
 }
 
   
@@ -129,10 +145,11 @@ Use the getLastReview function below to do the following:
 */
 
 
-function getLastReview(/*Your code here*/) {
-  /*Your code here*/
+function getLastReview(reviews) {
+ const review = reviews[reviews.length - 1]
+ return `${review.name} gave the restaurant a ${review.rating} star review, and their feedback was: ${review.feedback}`
 } 
-
+getLastReview(reviews)
 
 
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
